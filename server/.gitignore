@@ -1,0 +1,95 @@
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Dependency Directories
+# =========================
+node_modules/
+vendor/
+__pycache__/
+
+# =========================
+# Build / Output
+# =========================
+dist/
+build/
+out/
+.tmp/
+.cache/
+
+# =========================
+# Runtime Files
+# =========================
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# Coverage Reports
+# =========================
+coverage/
+.nyc_output/
+
+# =========================
+# Database Files
+# =========================
+*.sqlite
+*.db
+
+# =========================
+# Python Specific
+# =========================
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# =========================
+# Node Specific
+# =========================
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# =========================
+# Docker
+# =========================
+.dockerignore
+
+# =========================
+# Misc
+# =========================
+*.tgz
+*.bak
+*.tmp
