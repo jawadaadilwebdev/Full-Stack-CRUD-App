@@ -2,9 +2,9 @@ const enquiryModel = require("../../Models/enquiry.model");
 
 let enquiryInsert = async (req, res) => {
   try {
-    let { name, email, phone, message } = req.body;
+    let { fullname, email, phone, message } = req.body;
     let user = await new enquiryModel({
-      name,
+      fullname,
       email,
       phone,
       message,

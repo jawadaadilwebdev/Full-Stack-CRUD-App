@@ -1,10 +1,11 @@
 let express = require('express');
 let mongoose = require('mongoose');
+let cors = require('cors');
 const enquiryRoter = require('./App/Routes/Web/enquiryRoutes');
 require('dotenv').config()
 let app = express()
 app.use(express.json())
-
+app.use(cors())
 
 // Routes
 app.use("/api/enquiry",enquiryRoter)

@@ -1,7 +1,7 @@
 let mongoose = require('mongoose')
 
 let enquirySchema = new mongoose.Schema({
-    name:{
+    fullname:{
         type:String,
         required:true},
     email:{
