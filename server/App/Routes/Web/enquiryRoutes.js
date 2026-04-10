@@ -1,8 +1,9 @@
 let express = require("express");
-const { enquiryInsert } = require("../../Controllers/web/enquiryController");
+const { enquiryInsert, enquiryList } = require("../../Controllers/web/enquiryController");
 
 let enquiryRoter = express.Router();
 
 enquiryRoter.post("/insert",enquiryInsert)
+enquiryRoter.get("/list",enquiryList)
 
 module.exports = enquiryRoter

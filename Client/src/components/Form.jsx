@@ -1,7 +1,12 @@
 import { Button, Label, TextInput,Textarea } from "flowbite-react";
 import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import { useState } from "react";
 
-const Form = () => {
+const Form = ({ refresh }) => {
+      const notify = () => toast("Enquiry saved successfully!");
+      const[showToastify,setShowToastify] = useState(false);
+
 
   let saveEnquiry = (event) => {
     event.preventDefault();
@@ -14,6 +19,10 @@ const Form = () => {
   axios.post("http://localhost:5000/api/enquiry/insert",formData)
   .then((res)=>{
     console.log(res.data);
+    event.target.reset();
+    setShowToastify(true)
+    notify();
+    refresh();
   })
   .catch((err)=>{
     console.error(err);
@@ -43,6 +52,7 @@ const Form = () => {
 
   return (
     <form onSubmit={saveEnquiry} className="flex max-w-md flex-col gap-4 w-full py-10">
+          {showToastify?<ToastContainer />: null}
         <h1 className="mb-10 font-bold text-white text-xl">Enquiry Form</h1>
         <div>
         <div className="mb-2 block">
