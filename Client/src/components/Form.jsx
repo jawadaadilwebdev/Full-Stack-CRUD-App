@@ -1,10 +1,11 @@
 import { Button, Label, TextInput,Textarea } from "flowbite-react";
 import axios from "axios"
+import Swal from "sweetalert2";
 
 const Form = ({ refresh }) => {
 
 
-  let saveEnquiry = (event) => {
+  let saveEnquiry = async (event) => {
     event.preventDefault();
     let formData = {
       fullname: event.target.fullname.value,
@@ -13,10 +14,11 @@ const Form = ({ refresh }) => {
       message: event.target.message.value
     }
   axios.post("http://localhost:5000/api/enquiry/insert",formData)
-  .then((res)=>{
+  .then( async (res)=>{
     console.log(res.data);
     event.target.reset();
-    
+    await Swal.fire("Success!", "Your action was successful.", "success");
+
     refresh();
   })
   .catch((err)=>{
