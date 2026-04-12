@@ -1,23 +1,19 @@
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
+import axios from "axios"
+const EnquiryTable = ({enquiries,refresh}) => {
 
+  
 
-const EnquiryTable = ({enquiries}) => {
-
-  // const [enquiries, setEnquiries] = useState([]);
-
-
-
-
-  // useEffect(() => {
-  //   axios("http://localhost:5000/api/enquiry/list")
-  //     .then((res) => {
-  //       setEnquiries(res.data);
-        
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }, []);
+  let deleteRow = async (id) => {
+  try {
+    await axios.delete(`http://localhost:5000/api/enquiry/delete/${id}`);
+    // refresh UI or remove item from state
+    refresh();
+    console.log("Deleted successfully");
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   return (
     <div className="overflow-x-auto py-10">
@@ -30,10 +26,11 @@ const EnquiryTable = ({enquiries}) => {
             <TableHeadCell>Email</TableHeadCell>
             <TableHeadCell>Phone</TableHeadCell>
             <TableHeadCell>Message</TableHeadCell>
+            <TableHeadCell>Delete</TableHeadCell>
             <TableHeadCell>Edit</TableHeadCell>
           </TableRow>
         </TableHead>
-        <TableBody className="divide-y">
+        {enquiries.length > 0 ? <TableBody className="divide-y">
           {enquiries.map((enquiry, index) => (
             <TableRow key={enquiry._id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
               <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -44,13 +41,19 @@ const EnquiryTable = ({enquiries}) => {
               <TableCell>{enquiry.phone}</TableCell>
               <TableCell>{enquiry.message}</TableCell>
               <TableCell>
+                <button onClick={()=>deleteRow(enquiry._id)} className="font-medium text-red-600 hover:underline dark:text-red-500">
+                  Delete
+                </button>
+              </TableCell>
+              <TableCell>
                 <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
                   Edit
                 </a>
               </TableCell>
             </TableRow>
           ))}
-        </TableBody>
+        </TableBody>: <h2 className="mt-3">No Data Found</h2>}
+        
       </Table>
     </div>
   )

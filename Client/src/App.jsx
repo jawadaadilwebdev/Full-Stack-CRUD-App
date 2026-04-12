@@ -21,7 +21,7 @@ const [enquiries, setEnquiries] = useState([]);
       <h1 className="font-bold text-center text-2xl">User Enquiry</h1>
       <div className="w-[90%] h-[80vh]  my-6 mx-auto flex justify-around bg-gray-900 rounded-lg">
         <Form refresh={fetchEnquiries} className="w-[40%]"/>
-        <EnquiryTable enquiries={enquiries} className="w-[50%]"/>
+        <EnquiryTable enquiries={enquiries} refresh={fetchEnquiries} className="w-[50%]"/>
       </div>
     </div>
   );
