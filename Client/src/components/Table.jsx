@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const EnquiryTable = ({ enquiries, refresh }) => {
+const EnquiryTable = ({ enquiries, refresh, setformData }) => {
   let deleteRow = async (id) => {
     try {
       await Swal.fire({
@@ -25,11 +25,19 @@ const EnquiryTable = ({ enquiries, refresh }) => {
           refresh();
         }
       });
-      // refresh UI or remove item from state
     } catch (err) {
       console.error(err);
     }
   };
+  let editRow = async(id)=>{
+    axios.get(`http://localhost:5000/api/enquiry/single/${id}`)
+    .then((res)=>{
+      setformData(res.data) 
+    }).catch((err)=>{
+      console.error(err);
+    }
+    )
+  }
 
   return (
     <div className="overflow-x-auto py-10">
@@ -71,6 +79,7 @@ const EnquiryTable = ({ enquiries, refresh }) => {
                 <TableCell>
                   <a
                     href="#"
+                    onClick={() => editRow(enquiry._id)}
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                   >
                     Edit

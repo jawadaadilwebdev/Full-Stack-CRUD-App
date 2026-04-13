@@ -5,6 +5,13 @@ import axios from "axios";
 
 const App = () => {
 
+  const[formData,setFormData] = useState({
+    fullname: "",
+      email: "",
+      phone: "",
+      message: ""
+  })
+
 const [enquiries, setEnquiries] = useState([]);
 
   const fetchEnquiries = () => {
@@ -20,8 +27,8 @@ const [enquiries, setEnquiries] = useState([]);
     <div className="p-4">
       <h1 className="font-bold text-center text-2xl">User Enquiry</h1>
       <div className="w-[90%] h-[80vh]  my-6 mx-auto flex justify-around bg-gray-900 rounded-lg">
-        <Form refresh={fetchEnquiries} className="w-[40%]"/>
-        <EnquiryTable enquiries={enquiries} refresh={fetchEnquiries} className="w-[50%]"/>
+        <Form refresh={fetchEnquiries} className="w-[40%]" formData={formData} setformData={setFormData}/>
+        <EnquiryTable enquiries={enquiries} refresh={fetchEnquiries} setEnquiries={setEnquiries} setformData={setFormData} className="w-[50%]"/>
       </div>
     </div>
   );

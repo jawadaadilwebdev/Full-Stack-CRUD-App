@@ -29,13 +29,48 @@ let enquiryDelete = async (req, res) => {
   let enqId = req.params.id;
   try {
     let deleteEnquiry = await enquiryModel.findByIdAndDelete(enqId);
-      console.log("Delete API hit", req.params.id);
     res.status(200).json(deleteEnquiry);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 
 }
+
+let enquirySingleRow = async (req, res) => {
+  let enqId = req.params.id;
+  try {
+    let singleEnquiry = await enquiryModel.findOne({ _id: enqId });
+    res.status(200).json(singleEnquiry);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+
+}
+
+let enquiryUpdate = async(req,res)=>{
+    try {
+    const { id } = req.params;
+
+    const updatedUser = await enquiryModel.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,        // return updated document
+        runValidators: true
+      }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(updatedUser);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
     
 
-module.exports = { enquiryInsert, enquiryList , enquiryDelete};
+module.exports = { enquiryInsert, enquiryList , enquiryDelete,enquirySingleRow,enquiryUpdate};
