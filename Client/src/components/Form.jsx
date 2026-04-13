@@ -15,7 +15,12 @@ const Form = ({ refresh ,formData ,setformData}) => {
   axios.post("http://localhost:5000/api/enquiry/insert",recData)
   .then( async (res)=>{
     console.log(res.data);
-    event.target.reset();
+    setformData({
+          fullname: "",
+          email: "",
+          phone: "",
+          message: ""
+        });
     await Swal.fire("Success!", "Your action was successful.", "success");
     refresh();
   })
@@ -40,8 +45,14 @@ const updateUser = async (event) => {
       updatedData
     );
         await Swal.fire("Success!", "Your Updation was successful.", "success");
-
     refresh();
+        setformData({
+          fullname: "",
+          email: "",
+          phone: "",
+          message: ""
+        });
+
 
     console.log("Updated user:", response.data);
 
